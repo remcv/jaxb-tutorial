@@ -3,6 +3,7 @@ package remcv.com.github.jaxbtutorial;
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Marshaller;
+import jakarta.xml.bind.Unmarshaller;
 import remcv.com.github.jaxbtutorial.model.Book;
 
 import java.io.File;
@@ -17,16 +18,20 @@ public class App {
         Book book2 = new Book(2L, "Fundamentals of Neurology", "Mattle Mumenthaler", new Date());
 
         // marshal Book instances
-        marshalObject(book1, "./book1.xml");
+        marshalObject(book1, new File("./book1.xml"));
         marshalObject(book2, System.out);
+
+        // unmarshall
+        Book unmarshalledBook = unmarshallBook(new File("./book1.xml"));
+        System.out.println("\n" + unmarshalledBook);
     }
 
     // marshal an object to a file
-    private static <T> void marshalObject(T object, String filePath) throws JAXBException {
+    private static <T> void marshalObject(T object, File outputXmlFile) throws JAXBException {
         JAXBContext jaxbContext = JAXBContext.newInstance(object.getClass());
         Marshaller marshaller = jaxbContext.createMarshaller();
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-        marshaller.marshal(object, new File(filePath));
+        marshaller.marshal(object, outputXmlFile);
     }
 
     // marshal an object to a Java IO output stream
@@ -35,6 +40,14 @@ public class App {
         Marshaller marshaller = jaxbContext.createMarshaller();
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
         marshaller.marshal(object, out);
+    }
+
+    // unmarshall XML -> Book
+    private static Book unmarshallBook(File xmlFile) throws JAXBException {
+        JAXBContext jaxbContext = JAXBContext.newInstance(Book.class);
+        Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+        Book book = (Book) unmarshaller.unmarshal(xmlFile);
+        return book;
     }
 
 }
