@@ -1,6 +1,8 @@
 package remcv.com.github.jaxbtutorial.model;
 
 import jakarta.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import remcv.com.github.jaxbtutorial.adapter.DateAdapter;
 
 import java.util.Date;
 
@@ -58,6 +60,7 @@ public class Book {
         return date;
     }
 
+    @XmlJavaTypeAdapter(DateAdapter.class)
     public void setDate(Date date) {
         this.date = date;
     }
