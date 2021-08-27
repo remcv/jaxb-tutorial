@@ -5,6 +5,7 @@ import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Marshaller;
 import jakarta.xml.bind.Unmarshaller;
 import remcv.com.github.jaxbtutorial.model.Book;
+import remcv.com.github.jaxbtutorial.model.Buyer;
 
 import java.io.File;
 import java.io.OutputStream;
@@ -21,9 +22,12 @@ public class App {
         marshalObject(book1, new File("./book1.xml"));
         marshalObject(book2, System.out);
 
-        // unmarshall
+        // unmarshall a book xml
         Book unmarshalledBook = unmarshallBook(new File("./book1.xml"));
         System.out.println("\n" + unmarshalledBook);
+
+        // marshal a Buyer instance
+        marshalObject(new Buyer(32, "John", "Doe", book1), new File("./buyer.xml"));
     }
 
     // marshal an object to a file
