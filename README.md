@@ -1,6 +1,6 @@
 # jaxb-tutorial
 
-Learning resources and practice examples of Java Architecture for XML Binding (JAXB).
+Learning resources and practice examples of `Java Architecture for XML Binding` (JAXB).
 
 ## Important notes
 
@@ -14,7 +14,7 @@ Learning resources and practice examples of Java Architecture for XML Binding (J
     <dependency>
         <groupId>com.sun.xml.bind</groupId>
         <artifactId>jaxb-impl</artifactId>
-        <version>2.3.3</version>
+        <version>3.0.1</version>
     </dependency>
     ```
 
